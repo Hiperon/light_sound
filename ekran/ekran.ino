@@ -67,19 +67,32 @@ ekran bozek;
 
 LED_RGB_pix my_pixels;
 
-void loop() {
-
-  // For a set of NeoPixels the first NeoPixel is 0, second is 1, all the way up to the count of pixels minus one.
-bozek.rozmiar(10,9);
+void simple_pixel(int dwojkowy){
+  int a,b,c;
+  a=b=c=0;
+  if(dwojkowy%2){a=150;}
+  dwojkowy/=2;
+  if(dwojkowy%2){b=150;}
+  dwojkowy/=2;
+  if(dwojkowy%2){c=150;}
+  dwojkowy/=2;
   for(int i=1;i<=NUMPIXELS;i++){
 
     // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
 //    pixels.setPixelColor(i, pixels.Color(0,150,0)); // Moderately bright green color.
 //  my_pixels.set_pix(i,0,150,0);
-    bozek.set_one_pix(0,i,0,150,0);
+    bozek.set_one_pix(0,i,a,b,c);
     pixels.show(); // This sends the updated pixel color to the hardware.
-
     delay(delayval); // Delay for a period of time (in milliseconds).
+  }  
+}
 
+void loop() {
+
+  // For a set of NeoPixels the first NeoPixel is 0, second is 1, all the way up to the count of pixels minus one.
+  bozek.rozmiar(10,9);
+  for(int i=0;i<8;i++){
+  simple_pixel(i);
   }
+
 }
